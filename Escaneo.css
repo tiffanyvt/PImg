@@ -144,54 +144,6 @@ button.ui:active{
       background-color: #1e2d5b;
 }
 
-#panelTrivia {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(360px, 90%);
-    max-height: 70%;
-    overflow-y: auto;
-    background: rgba(12, 21, 48, 0.95);
-    border: 1px solid #2b3670;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-    z-index: 20;
-    text-align: center;
-}
-.trivia-question {
-    margin-bottom: 16px;
-}
-
-.trivia-question .options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.trivia-opt {
-    background: #0f1a3a;
-    color: var(--text);
-    border: 1px solid #2b3670;
-    padding: 8px 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.trivia-opt:hover {
-    border-color: var(--brand-3);
-}
-
-.feedback {
-    margin-top: 8px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
 #domVideoOverlay{
 display:none;
 position:fixed;
@@ -264,9 +216,5 @@ max-height: 85vh;
     width: 95vw;
     max-height: 70vh;
     padding: 8px;
-  }
-
-  .trivia-question .options {
-    flex-direction: column;
   }
 }

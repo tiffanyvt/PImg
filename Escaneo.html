@@ -23,7 +23,7 @@
                 <div class="topbar">
                     <div class="badge" role="status" aria-live="polite">
                     <span class="dot"></span>
-                    <span class="hint" id="scanHint"><b>Escanea una bandera y selecciona uno de los 4 botones</b></span>
+                    <span class="hint" id="scanHint"><b>Escanea una bandera y selecciona uno de los 2 botones</b></span>
                     </div>
                     <button class="ui" id="btnAyuda" aria-haspopup="dialog" aria-controls="panelInfo">¿Cómo funciona?</button>
                 </div>
@@ -33,8 +33,9 @@
                     <h3 id="helpTitle">Ayuda rápida</h3>
                     <ol>
                         <li>Apunta la bandera de los países clasificados a la cámara.</li>
-                        <li>Usa los botones para: ver video, estadísticas, un modelo 3D animado o una trivia, y para aplicar filtros al video.</li>
+                        <li>Usa los botones principales para: ver video o un modelo 3D.</li>
                         <li>Los filtros (B&N, Sepia e Invertir) solo se aplicaran al video cuando se haya dado clic a su botón.</li>
+                        <li>El modelo solo será animado cuando le des clic a 'Animar'</li>
                     </ol>
                     <p>Para una explicación más detallada:</p>
                         <a href="ManualDeUsuario.pdf" target="_blank">
@@ -44,7 +45,7 @@
                
                 <div class="overlay-menu" id="overlay-menu" aria-label="Controles" style="display: none;">
                     <button class="ui" id="btnVideo">1. Ver video</button>
-                    <button class="ui" id="btnModelo">3. Modelo 3D</button>
+                    <button class="ui" id="btnModelo">2. Modelo 3D</button>
 
                     <div class="video-filters" id="videoFilters" style="display:none; margin-top:3px;">
                         <label><b>Filtros de video:</b></label><br>
@@ -228,29 +229,6 @@
             model.setAttribute("animation-mixer", "clip: *; loop: repeat");
             entity.appendChild(model);
 
-            const statsGroup = document.createElement("a-entity");
-            statsGroup.setAttribute("id", `stats-${country}-${idx}`);
-            statsGroup.setAttribute("visible", "false");
-
-            const plane = document.createElement("a-plane");
-            plane.setAttribute("width", "0.7");
-            plane.setAttribute("height", "0.6");
-            plane.setAttribute("color", "#0f1a3a");
-            plane.setAttribute("opacity", "0.7");
-            plane.setAttribute("material", "shader: standard; side: double");
-            statsGroup.appendChild(plane);
-
-            const text = document.createElement("a-text");
-            text.setAttribute("id", `statsText-${country}-${idx}`);
-            text.setAttribute("color", "#FFD700");
-            text.setAttribute("width", "1.2");
-            text.setAttribute("align", "center");
-            text.setAttribute("position", "0 0 0.02");
-            text.setAttribute("wrap-count", "40");
-            text.setAttribute("font", "https://cdn.aframe.io/fonts/Roboto-msdf.json");
-            statsGroup.appendChild(text);
-            entity.appendChild(statsGroup);
-
             scene.appendChild(entity);
 
             entity.addEventListener("targetFound", () => {
@@ -323,8 +301,6 @@
             if (model) { model.setAttribute("visible","false"); model.removeAttribute("animation"); }
             const videoEl = document.querySelector(videos[c].video);
             if (videoEl) videoEl.pause();
-            const statsGroup = document.getElementById(`stats-${c}-${idx}`);
-            if (statsGroup) statsGroup.setAttribute("visible","false");
             });
         });
         if (domVideoOverlay.style.display === 'block') {
@@ -333,8 +309,6 @@
             domVideo.removeAttribute('src');
             domVideo.load();
         }
-        panelStats.style.display = "none";
-        panelTrivia.style.display = "none";
         videoFilters.style.display = "none";
         }
   </script>
