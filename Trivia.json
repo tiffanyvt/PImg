@@ -1,0 +1,54 @@
+{
+  "triviaGeneral": [
+    {
+      "pregunta": "¿Cuál fue el primer país en ganar una Copa Mundial?",
+      "opciones": ["Brasil", "Uruguay", "Italia"],
+      "respuesta": "Uruguay"
+    },
+    {
+      "pregunta": "¿Qué país ha ganado más Mundiales?",
+      "opciones": ["Alemania", "Brasil", "Argentina"],
+      "respuesta": "Brasil"
+    },
+    {
+      "pregunta": "¿En qué año se jugó la primera Copa Mundial?",
+      "opciones": ["1930", "1940", "1950"],
+      "respuesta": "1930"
+    },
+    {
+      "pregunta": "¿Qué jugador tiene más goles en la historia de los Mundiales?",
+      "opciones": ["Pelé", "Klose", "Messi"],
+      "respuesta": "Klose"
+    },
+    {
+      "pregunta": "¿Qué selección fue campeona en el Mundial de 2022?",
+      "opciones": ["Francia", "Argentina", "Brasil"],
+      "respuesta": "Argentina"
+    },
+    {
+      "pregunta": "¿Cuántos equipos participarán en el Mundial 2026?",
+      "opciones": ["32", "40", "48"],
+      "respuesta": "48"
+    },
+    {
+      "pregunta": "¿Qué país fue el primero en organizar un Mundial?",
+      "opciones": ["Italia", "Francia", "Uruguay"],
+      "respuesta": "Uruguay"
+    },
+    {
+      "pregunta": "¿Quién fue el máximo goleador del Mundial de 2014?",
+      "opciones": ["James Rodríguez", "Thomas Müller", "Lionel Messi"],
+      "respuesta": "James Rodríguez"
+    },
+    {
+      "pregunta": "¿Qué país fue el primero en ganar dos Mundiales consecutivos?",
+      "opciones": ["Brasil", "Italia", "Alemania"],
+      "respuesta": "Italia"
+    },
+    {
+      "pregunta": "¿Qué país organizó el Mundial de 2010?",
+      "opciones": ["Sudáfrica", "Brasil", "Alemania"],
+      "respuesta": "Sudáfrica"
+    }
+  ]
+}

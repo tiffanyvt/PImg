@@ -1,0 +1,342 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARCup Experience</title>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <link rel="stylesheet" href="Escaneo.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="brand">
+                <span class="dot" aria-hidden="true"></span>
+                <div>ARCup Experience</div>
+            </div>
+        </header>
+        <main>
+            <section class="stage">
+                <div class="topbar">
+                    <div class="badge" role="status" aria-live="polite">
+                    <span class="dot"></span>
+                    <span class="hint" id="scanHint"><b>Escanea una bandera y selecciona uno de los 4 botones</b></span>
+                    </div>
+                    <button class="ui" id="btnAyuda" aria-haspopup="dialog" aria-controls="panelInfo">¿Cómo funciona?</button>
+                </div>
+
+                <div class="panel" id="panelInfo" role="dialog" aria-modal="false" aria-labelledby="helpTitle">
+                    <button class="close" id="closeInfo">Cerrar</button>
+                    <h3 id="helpTitle">Ayuda rápida</h3>
+                    <ol>
+                        <li>Apunta la bandera de los países clasificados a la cámara.</li>
+                        <li>Usa los botones para: ver video, estadísticas, un modelo 3D animado o una trivia, y para aplicar filtros al video.</li>
+                        <li>Los filtros (B&N, Sepia e Invertir) solo se aplicaran al video cuando se haya dado clic a su botón.</li>
+                    </ol>
+                    <p>Para una explicación más detallada:</p>
+                        <a href="ManualDeUsuario.pdf" target="_blank">
+                            <button class="ui-manual">Ver manual de usuario</button>
+                    </a>
+                </div>
+               
+                <div class="overlay-menu" id="overlay-menu" aria-label="Controles" style="display: none;">
+                    <button class="ui" id="btnVideo">1. Ver video</button>
+                    <button class="ui" id="btnModelo">3. Modelo 3D</button>
+
+                    <div class="video-filters" id="videoFilters" style="display:none; margin-top:3px;">
+                        <label><b>Filtros de video:</b></label><br>
+                        <button class="ui" id="filterOriginal">Original</button>
+                        <button class="ui" id="filterBW">B&N</button>
+                        <button class="ui" id="filterSepia">Sepia</button>
+                        <button class="ui" id="filterInvert">Invertir</button>
+                    </div>
+                </div>
+                <div id="domVideoOverlay" role="dialog" aria-hidden="true">
+                    <video id="domVideo" playsinline webkit-playsinline controls crossorigin="anonymous"></video>
+                </div>
+                <a-scene
+                    mindar-image="imageTargetSrc: ./assets/banderas.mind; autoStart: true;"
+                    renderer="colorManagement: true; physicallyCorrectLights: false"
+                    color-space:="sRGB"
+                    vr-mode-ui="enabled: false"
+                    device-orientation-permission-ui="enabled: true"
+                >
+                    <a-assets>
+                        <a-asset-item id="modeloMX" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloBR" src="./Modelos/BrasilTrofeo/trofeoo.gltf"></a-asset-item>
+                        <a-asset-item id="modeloCA" src="./Modelos/CanadaBalon/CanadaBalon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloAUS" src="./Modelos/AustraliaBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloUSA" src="./Modelos/USABalon/USAbalon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloARG" src="./Modelos/ArgentinaTrofeo/trofeoo.gltf"></a-asset-item>
+                        <a-asset-item id="modeloSKOR" src="./Modelos/SKBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloECU" src="./Modelos/EcuadorBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloIRAN" src="./Modelos/IranBalon/IranBalon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloJPN" src="./Modelos/JaponBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloJOR" src="./Modelos/JordaniaBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloNZ" src="./Modelos/NZBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloUZB" src="./Modelos/UzbekistanBalon/uzbalon.gltf"></a-asset-item>
+
+                        <video id="videoMX" src="./Assets/videoMX.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline></video>
+                        <video id="videoBR" src="./Assets/videoBR.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoCA" src="./Assets/videoCA.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoAUS" src="./Assets/videoAUS.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoUSA" src="./Assets/videoUSA.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoARG" src="./Assets/videoARG.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoSKOR" src="./Assets/videoSKOR.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoECU" src="./Assets/videoECU.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoIRAN" src="./Assets/videoIRAN.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoJPN" src="./Assets/videoJPN.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoJOR" src="./Assets/videoJOR.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoNZ" src="./Assets/videoNZ.mp4" loop crossorigin="anonymous" playsinline></video>
+                        <video id="videoUZB" src="./Assets/videoUZB.mp4" loop crossorigin="anonymous" playsinline></video>
+                    </a-assets>
+
+                    <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+  
+                </a-scene>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const targetMap = {
+        mexico: [0,1,2,3,4,5],
+        brasil: [6,7,8,9,10,11],
+        canada: [12, 13, 14, 15, 16, 17],
+        australia: [18, 19, 20, 21, 22, 23],
+        usa: [24, 25, 26, 27, 28, 29],
+        argentina: [30, 31, 32, 33, 34, 35],
+        coreaDelSur: [36, 37, 38, 39, 40, 41],
+        ecuador: [42, 43, 44, 45, 46, 47],
+        iran: [48, 49, 50, 51, 52, 53],
+        japon: [54, 55, 56, 57, 58, 59],
+        jordania: [60, 61, 62, 63, 64, 65],
+        nuevaZelanda: [66, 67, 68, 69, 70, 71],
+        uzbekistan: [72, 73, 74, 75, 76, 77],
+        };
+
+        const modelos = {
+        mexico: "#modeloMX",
+        brasil: "#modeloBR",
+        canada: "#modeloCA",
+        australia: "#modeloAUS",
+        usa: "#modeloUSA",
+        argentina: "#modeloARG",
+        coreaDelSur: "#modeloSKOR",
+        ecuador: "#modeloECU",
+        iran: "#modeloIRAN",
+        japon: "#modeloJPN",
+        jordania: "#modeloJOR",
+        nuevaZelanda: "#modeloNZ",
+        uzbekistan: "#modeloUZB",
+        };
+
+        const videos = {
+        mexico: { video: "#videoMX", ar: "videoMexico" },
+        brasil: { video: "#videoBR", ar: "videoBrasil" },
+        canada: { video: "#videoCA", ar: "videoCanada" },
+        australia: { video: "#videoAUS", ar: "videoAustralia" },
+        usa: { video: "#videoUSA", ar: "videoEstadosUnidos" },
+        argentina: { video: "#videoARG", ar: "videoArgentina" },
+        coreaDelSur: { video: "#videoSKOR", ar: "videoCoreaDelSur" },
+        ecuador: { video: "#videoECU", ar: "videoEcuador" },
+        iran: { video: "#videoIRAN", ar: "videoIrann" },
+        japon: { video: "#videoJPN", ar: "videoJapon" },
+        jordania: { video: "#videoJOR", ar: "videoJordania" },
+        nuevaZelanda: { video: "#videoNZ", ar: "videoNuevaZelanda" },
+        uzbekistan: { video: "#videoUZB", ar: "videoUzbekistan" },
+        };
+
+        const escalas = {
+        mexico: "0.05 0.05 0.05",
+        brasil: "0.8 0.8 0.8",
+        canada: "0.0002 0.0002 0.0002",
+        australia: "0.05 0.05 0.05",
+        usa: "0.0002 0.0002 0.0002",
+        argentina: "0.8 0.8 0.8",
+        coreaDelSur: "0.0002 0.0002 0.0002",
+        ecuador: "0.05 0.05 0.05",
+        iran: "0.0002 0.0002 0.0002",
+        japon: "0.05 0.05 0.05",
+        jordania: "0.0002 0.0002 0.0002",
+        nuevaZelanda: "0.05 0.05 0.05",
+        uzbekistan: "0.0002 0.0002 0.0002",
+        };
+
+        const overlayMenu = document.getElementById("overlay-menu");
+        const scanHint = document.getElementById("scanHint");
+        const btnModelo = document.getElementById("btnModelo");
+        const btnVideo = document.getElementById("btnVideo");
+        const domVideoOverlay = document.getElementById('domVideoOverlay');
+        const domVideo = document.getElementById('domVideo');
+        const btnAyuda = document.getElementById('btnAyuda');
+        const panelInfo = document.getElementById('panelInfo');
+        const closeInfo = document.getElementById('closeInfo');
+        btnAyuda.addEventListener('click', ()=> panelInfo.style.display = 'block');
+        closeInfo.addEventListener('click', ()=> panelInfo.style.display = 'none');
+
+        let DATA = {};
+        let currentTarget = null;
+
+        const videoFilters = document.getElementById("videoFilters");
+        const filterOriginal = document.getElementById("filterOriginal");
+        const filterBW = document.getElementById("filterBW");
+        const filterSepia = document.getElementById("filterSepia");
+        const filterInvert = document.getElementById("filterInvert");
+
+        function aplicarFiltro(filtro) {
+        if (!domVideo) return;
+        switch (filtro) {
+            case "bw":
+            domVideo.style.filter = "grayscale(100%)";
+            break;
+            case "sepia":
+            domVideo.style.filter = "sepia(100%)";
+            break;
+            case "invert":
+            domVideo.style.filter = "invert(100%)";
+            break; 
+            default:
+            domVideo.style.filter = "none";
+        }
+        }
+        filterOriginal.addEventListener("click", () => aplicarFiltro("original"));
+        filterBW.addEventListener("click", () => aplicarFiltro("bw"));
+        filterSepia.addEventListener("click", () => aplicarFiltro("sepia"));
+        filterInvert.addEventListener("click", () => aplicarFiltro("invert"));
+        
+        fetch("datos.json")
+        .then(res => res.json())
+        .then(json => DATA = json)
+        .catch(err => console.error("Error cargando datos.json:", err));
+
+        const scene = document.querySelector("a-scene");
+        Object.entries(targetMap).forEach(([country, indices]) => {
+        indices.forEach(idx => {
+            const entity = document.createElement("a-entity");
+            entity.setAttribute("mindar-image-target", `targetIndex: ${idx}`);
+
+            const model = document.createElement("a-gltf-model");
+            model.setAttribute("id", `gltf-${country}-${idx}`);
+            model.setAttribute("src", modelos[country]);
+            model.setAttribute("position", "0 0 0");
+            model.setAttribute("scale", escalas[country] || "0.002 0.002 0.002");
+            model.setAttribute("visible", "false");
+            model.setAttribute("animation-mixer", "clip: *; loop: repeat");
+            entity.appendChild(model);
+
+            const statsGroup = document.createElement("a-entity");
+            statsGroup.setAttribute("id", `stats-${country}-${idx}`);
+            statsGroup.setAttribute("visible", "false");
+
+            const plane = document.createElement("a-plane");
+            plane.setAttribute("width", "0.7");
+            plane.setAttribute("height", "0.6");
+            plane.setAttribute("color", "#0f1a3a");
+            plane.setAttribute("opacity", "0.7");
+            plane.setAttribute("material", "shader: standard; side: double");
+            statsGroup.appendChild(plane);
+
+            const text = document.createElement("a-text");
+            text.setAttribute("id", `statsText-${country}-${idx}`);
+            text.setAttribute("color", "#FFD700");
+            text.setAttribute("width", "1.2");
+            text.setAttribute("align", "center");
+            text.setAttribute("position", "0 0 0.02");
+            text.setAttribute("wrap-count", "40");
+            text.setAttribute("font", "https://cdn.aframe.io/fonts/Roboto-msdf.json");
+            statsGroup.appendChild(text);
+            entity.appendChild(statsGroup);
+
+            scene.appendChild(entity);
+
+            entity.addEventListener("targetFound", () => {
+            currentTarget = { country, idx };
+            overlayMenu.style.display = "block";
+            });
+            entity.addEventListener("targetLost", () => {
+            currentTarget = null;
+            overlayMenu.style.display = "none";
+            ocultarTodo();
+            });
+        });
+        });
+
+        btnModelo.addEventListener("click", () => {
+            if (!currentTarget) return;
+            ocultarTodo();
+            const model = document.getElementById(`gltf-${currentTarget.country}-${currentTarget.idx}`);
+            if (model) {
+                model.setAttribute("visible", "true");
+
+                if (currentTarget.country === "ecuador" ) {
+                    model.setAttribute("animation", {
+                        property: "position",
+                        dir: "alternate",
+                        dur: 1000,
+                        easing: "easeInOutQuad",
+                        loop: true,
+                        to: "0 0.4 0" 
+                    });
+                } else {
+                    model.setAttribute("animation", "property: rotation; to: 0 360 0; loop:true; dur:10000");
+                }
+            }
+        });
+
+        btnVideo.addEventListener("click", () => {
+        if (!currentTarget) return;
+        ocultarTodo();
+
+        const sourceVideoEl = document.querySelector(videos[currentTarget.country].video);
+        if (!sourceVideoEl) {
+            console.warn('Video fuente no encontrado para', currentTarget);
+            return;
+        }
+
+        const srcToUse = sourceVideoEl.currentSrc || sourceVideoEl.src || sourceVideoEl.getAttribute('src');
+        domVideo.src = srcToUse;
+        domVideo.currentTime = 0;
+        domVideo.muted = sourceVideoEl.muted;
+        domVideo.playsInline = true;
+        domVideo.setAttribute('playsinline', ''); 
+        domVideo.style.filter = "none";
+        domVideoOverlay.style.display = 'block';
+        domVideo.focus();
+
+        const playPromise = domVideo.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.catch(err => {
+            console.warn('Reproducción bloqueada (necesita interacción):', err);
+            });
+        }
+        videoFilters.style.display = "block";
+        });
+
+        function ocultarTodo() {
+        Object.entries(targetMap).forEach(([c, indices]) => {
+            indices.forEach(idx => {
+            const model = document.getElementById(`gltf-${c}-${idx}`);
+            if (model) { model.setAttribute("visible","false"); model.removeAttribute("animation"); }
+            const videoEl = document.querySelector(videos[c].video);
+            if (videoEl) videoEl.pause();
+            const statsGroup = document.getElementById(`stats-${c}-${idx}`);
+            if (statsGroup) statsGroup.setAttribute("visible","false");
+            });
+        });
+        if (domVideoOverlay.style.display === 'block') {
+            domVideo.pause();
+            domVideoOverlay.style.display = 'none';
+            domVideo.removeAttribute('src');
+            domVideo.load();
+        }
+        panelStats.style.display = "none";
+        panelTrivia.style.display = "none";
+        videoFilters.style.display = "none";
+        }
+  </script>
+</body>
+</html>
