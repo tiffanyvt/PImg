@@ -46,6 +46,8 @@
                 <div class="overlay-menu" id="overlay-menu" aria-label="Controles" style="display: none;">
                     <button class="ui" id="btnVideo">1. Ver video</button>
                     <button class="ui" id="btnModelo">2. Modelo 3D</button>
+                    <button class="ui" id="btnAnimar" style="display:none;">Animar modelo</button>
+                    <button class="ui" id="btnDetenerAnimacion" style="display:none;">Detener animación</button>
 
                     <div class="video-filters" id="videoFilters" style="display:none; margin-top:3px;">
                         <label><b>Filtros de video:</b></label><br>
@@ -173,13 +175,14 @@
         const btnVideo = document.getElementById("btnVideo");
         const domVideoOverlay = document.getElementById('domVideoOverlay');
         const domVideo = document.getElementById('domVideo');
+        const btnAnimar = document.getElementById("btnAnimar");
+        const btnDetenerAnimacion = document.getElementById("btnDetenerAnimacion");
         const btnAyuda = document.getElementById('btnAyuda');
         const panelInfo = document.getElementById('panelInfo');
         const closeInfo = document.getElementById('closeInfo');
         btnAyuda.addEventListener('click', ()=> panelInfo.style.display = 'block');
         closeInfo.addEventListener('click', ()=> panelInfo.style.display = 'none');
 
-        let DATA = {};
         let currentTarget = null;
 
         const videoFilters = document.getElementById("videoFilters");
@@ -238,27 +241,53 @@
         });
         });
 
+        btnAnimar.addEventListener("click", () => {
+            if(!currentTarget) return;
+            const model = document.getElementById(`gltf-${currentTarget.country}-${currentTarget.idx}`);
+            if (!model) return;
+
+            model.removeAttribute("animation");
+            model.removeAttribute("animation-mixer");
+
+            if (["mexico", "ecuador", "australia", "japon", "nuevaZelanda"].includes(currentTarget.country)) {
+            model.setAttribute("animation", {
+            property: "position",
+            dir: "alternate",
+            dur: 1000,
+            easing: "easeInOutQuad",
+            loop: true,
+            to: "0 0.2 0"
+            });
+            } else {
+                model.setAttribute("animation", "property: rotation; to: 0 360 0; loop:true; dur:10000");
+            }
+
+            model.setAttribute("animation-mixer", "clip: *; loop: repeat");
+        })
+
+        btnDetenerAnimacion.addEventListener("click", () => {
+        if(!currentTarget) return;
+        const model = document.getElementById(`gltf-${currentTarget.country}-${currentTarget.idx}`);
+        if (!model) return;
+
+        model.removeAttribute("animation");
+        model.removeAttribute("animation-mixer");
+
+        if (["mexico", "ecuador", "australia", "japon", "nuevaZelanda"].includes(currentTarget.country)) {
+        model.setAttribute("position", "0 0 0");
+        }
+        });
+
         btnModelo.addEventListener("click", () => {
             if (!currentTarget) return;
             ocultarTodo();
             const model = document.getElementById(`gltf-${currentTarget.country}-${currentTarget.idx}`);
-            if (model) {
-                model.setAttribute("visible", "true");
-
-                if (currentTarget.country === "ecuador" ) {
-                    model.setAttribute("animation", {
-                        property: "position",
-                        dir: "alternate",
-                        dur: 1000,
-                        easing: "easeInOutQuad",
-                        loop: true,
-                        to: "0 0.4 0" 
-                    });
-                } else {
-                    model.setAttribute("animation", "property: rotation; to: 0 360 0; loop:true; dur:10000");
+                if (model) {
+                    model.setAttribute("visible", "true");
+                    btnAnimar.style.display = "inline-block"; 
+                    btnDetenerAnimacion.style.display = "inline-block";
                 }
-            }
-        });
+            });
 
         btnVideo.addEventListener("click", () => {
         if (!currentTarget) return;
@@ -290,22 +319,29 @@
         });
 
         function ocultarTodo() {
-        Object.entries(targetMap).forEach(([c, indices]) => {
-            indices.forEach(idx => {
-            const model = document.getElementById(`gltf-${c}-${idx}`);
-            if (model) { model.setAttribute("visible","false"); model.removeAttribute("animation"); }
-            const videoEl = document.querySelector(videos[c].video);
-            if (videoEl) videoEl.pause();
+            Object.entries(targetMap).forEach(([c, indices]) => {
+                indices.forEach(idx => {
+                const model = document.getElementById(`gltf-${c}-${idx}`);
+                if (model) { 
+                    model.setAttribute("visible","false"); 
+                    model.removeAttribute("animation"); 
+                    model.removeAttribute("animation-mixer"); 
+                }
+                const videoEl = document.querySelector(videos[c].video);
+                if (videoEl) videoEl.pause();
+                });
             });
-        });
-        if (domVideoOverlay.style.display === 'block') {
-            domVideo.pause();
-            domVideoOverlay.style.display = 'none';
-            domVideo.removeAttribute('src');
-            domVideo.load();
+            if (domVideoOverlay.style.display === 'block') {
+                domVideo.pause();
+                domVideoOverlay.style.display = 'none';
+                domVideo.removeAttribute('src');
+                domVideo.load();
+            }
+            videoFilters.style.display = "none";
+            btnAnimar.style.display = "none"; 
+            btnDetenerAnimacion.style.display = "none";
         }
-        videoFilters.style.display = "none";
-        }
+
   </script>
 </body>
 </html>
