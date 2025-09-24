@@ -5,6 +5,10 @@
 * { 
   box-sizing: border-box;
 }
+#ARCUP {
+  text-decoration: none;
+  color: white;
+}
 html,body
 {
     height:100%
