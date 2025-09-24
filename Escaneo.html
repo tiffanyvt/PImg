@@ -66,19 +66,19 @@
                     device-orientation-permission-ui="enabled: true"
                 >
                     <a-assets>
-                        <a-asset-item id="modeloMX" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloBR" src="./Modelos/BrasilTrofeo/trofeo.gltf"></a-asset-item>
-                        <a-asset-item id="modeloCA" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloAUS" src="./Modelos/AustraliaBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloUSA" src="./Modelos/USABalon/usa.gltf"></a-asset-item>
-                        <a-asset-item id="modeloARG" src="./Modelos/ArgentinaTrofeo/trofeo.gltf"></a-asset-item>
-                        <a-asset-item id="modeloSKOR" src="./Modelos/SKBalon/SK.gltf"></a-asset-item>
-                        <a-asset-item id="modeloECU" src="./Modelos/EcuadorBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloIRAN" src="./Modelos/IranBalon/SK.gltf"></a-asset-item>
-                        <a-asset-item id="modeloJPN" src="./Modelos/JaponBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloJOR" src="./Modelos/JordaniaBalon/SK.gltf"></a-asset-item>
-                        <a-asset-item id="modeloNZ" src="./Modelos/NZBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloUZB" src="./Modelos/UzbBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloMX" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloBR" preload="none" src="./Modelos/BrasilTrofeo/trofeo.gltf"></a-asset-item>
+                        <a-asset-item id="modeloCA" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
+                        <a-asset-item id="modeloAUS" preload="none" src="./Modelos/AustraliaBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloUSA" preload="none" src="./Modelos/USABalon/usa.gltf"></a-asset-item>
+                        <a-asset-item id="modeloARG" preload="none" src="./Modelos/ArgentinaTrofeo/trofeo.gltf"></a-asset-item>
+                        <a-asset-item id="modeloSKOR" preload="none" src="./Modelos/SKBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloECU" preload="none" src="./Modelos/EcuadorBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloIRAN" preload="none" src="./Modelos/IranBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloJPN" preload="none" src="./Modelos/JaponBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloJOR" preload="none" src="./Modelos/JordaniaBalon/SK.gltf"></a-asset-item>
+                        <a-asset-item id="modeloNZ" preload="none" src="./Modelos/NZBalon/balon.gltf"></a-asset-item>
+                        <a-asset-item id="modeloUZB" preload="none" src="./Modelos/UzbBalon/SK.gltf"></a-asset-item>
 
                         <video id="videoMX" src="./Assets/videoMX.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline></video>
                         <video id="videoBR" src="./Assets/videoBR.mp4" loop crossorigin="anonymous" playsinline></video>
@@ -153,11 +153,11 @@
 
         const escalas = {
         mexico: "0.05 0.05 0.05",
-        brasil: "0.8 0.8 0.8",
+        brasil: "0.0008 0.0008 0.0008",
         canada: "0.0002 0.0002 0.0002",
         australia: "0.05 0.05 0.05",
         usa: "0.0002 0.0002 0.0002",
-        argentina: "0.8 0.8 0.8",
+        argentina: "0.0008 0.0008 0.0008",
         coreaDelSur: "0.0002 0.0002 0.0002",
         ecuador: "0.05 0.05 0.05",
         iran: "0.0002 0.0002 0.0002",
@@ -208,11 +208,6 @@
         filterBW.addEventListener("click", () => aplicarFiltro("bw"));
         filterSepia.addEventListener("click", () => aplicarFiltro("sepia"));
         filterInvert.addEventListener("click", () => aplicarFiltro("invert"));
-        
-        fetch("datos.json")
-        .then(res => res.json())
-        .then(json => DATA = json)
-        .catch(err => console.error("Error cargando datos.json:", err));
 
         const scene = document.querySelector("a-scene");
         Object.entries(targetMap).forEach(([country, indices]) => {
