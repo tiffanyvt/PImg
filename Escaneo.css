@@ -58,7 +58,7 @@ main{
 .stage{
       position:relative; 
       width:100%; 
-      max-width:700px; 
+      max-width:560px; /*700*/
       aspect-ratio:3/4; 
       border-radius:var(--radius); 
       overflow:hidden; 
