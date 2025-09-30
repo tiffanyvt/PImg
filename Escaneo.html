@@ -266,7 +266,6 @@
 
             model.setAttribute("animation-mixer", "clip: *; loop: repeat");
         })
-
         btnDetenerAnimacion.addEventListener("click", () => {
         if(!currentTarget) return;
         const model = document.getElementById(`gltf-${currentTarget.country}-${currentTarget.idx}`);
@@ -274,12 +273,10 @@
 
         model.removeAttribute("animation");
         model.removeAttribute("animation-mixer");
-
         if (["mexico", "ecuador", "australia", "japon", "nuevaZelanda"].includes(currentTarget.country)) {
         model.setAttribute("position", "0 0 0");
         }
         });
-
         btnModelo.addEventListener("click", () => {
             if (!currentTarget) return;
             ocultarTodo();
@@ -290,7 +287,6 @@
                     btnDetenerAnimacion.style.display = "inline-block";
                 }
             });
-
         btnVideo.addEventListener("click", () => {
         if (!currentTarget) return;
         ocultarTodo();
@@ -310,7 +306,6 @@
         domVideo.style.filter = "none";
         domVideoOverlay.style.display = 'block';
         domVideo.focus();
-
         const playPromise = domVideo.play();
         if (playPromise && typeof playPromise.then === 'function') {
             playPromise.catch(err => {
@@ -319,7 +314,6 @@
         }
         videoFilters.style.display = "block";
         });
-
         function ocultarTodo() {
             Object.entries(targetMap).forEach(([c, indices]) => {
                 indices.forEach(idx => {
@@ -343,7 +337,6 @@
             btnAnimar.style.display = "none"; 
             btnDetenerAnimacion.style.display = "none";
         }
-
   </script>
 </body>
 </html>
