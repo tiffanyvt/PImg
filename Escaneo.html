@@ -71,30 +71,10 @@
                         <a-asset-item id="modeloMX" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item> 
                         <a-asset-item id="modeloBR" preload="none" src="./Modelos/BrasilTrofeo/trofeo.gltf"></a-asset-item>
                         <a-asset-item id="modeloCA" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloAUS" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloUSA" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloARG" preload="none" src="./Modelos/BrasilTrofeo/trofeo.gltf"></a-asset-item>
-                        <a-asset-item id="modeloSKOR" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloECU" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloIRAN" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloJPN" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloJOR" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
-                        <a-asset-item id="modeloNZ" preload="none" src="./Modelos/MexicoBalon/balon.gltf"></a-asset-item>
-                        <a-asset-item id="modeloUZB" preload="none" src="./Modelos/CanadaBalon/CA.gltf"></a-asset-item>
 
                         <video id="videoMX" src="./Assets/videoMX.mp4" loop crossorigin="anonymous" webkit-playsinline playsinline></video>
                         <video id="videoBR" src="./Assets/videoBR.mp4" loop crossorigin="anonymous" playsinline></video>
                         <video id="videoCA" src="./Assets/videoCA.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoAUS" src="./Assets/videoAUS.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoUSA" src="./Assets/videoUSA.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoARG" src="./Assets/videoARG.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoSKOR" src="./Assets/videoSKOR.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoECU" src="./Assets/videoECU.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoIRAN" src="./Assets/videoIRAN.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoJPN" src="./Assets/videoJPN.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoJOR" src="./Assets/videoJOR.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoNZ" src="./Assets/videoNZ.mp4" loop crossorigin="anonymous" playsinline></video>
-                        <video id="videoUZB" src="./Assets/videoUZB.mp4" loop crossorigin="anonymous" playsinline></video>
                     </a-assets>
 
                     <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
@@ -109,64 +89,24 @@
         mexico: [0,1,2,3,4,5],
         brasil: [6,7,8,9,10,11],
         canada: [12, 13, 14, 15, 16, 17],
-        australia: [18, 19, 20, 21, 22, 23],
-        usa: [24, 25, 26, 27, 28, 29],
-        argentina: [30, 31, 32, 33, 34, 35],
-        coreaDelSur: [36, 37, 38, 39, 40, 41],
-        ecuador: [42, 43, 44, 45, 46, 47],
-        iran: [48, 49, 50, 51, 52, 53],
-        japon: [54, 55, 56, 57, 58, 59],
-        jordania: [60, 61, 62, 63, 64, 65],
-        nuevaZelanda: [66, 67, 68, 69, 70, 71],
-        uzbekistan: [72, 73, 74, 75, 76, 77],
         };
 
         const modelos = {
         mexico: "#modeloMX",
         brasil: "#modeloBR",
         canada: "#modeloCA",
-        australia: "#modeloAUS",
-        usa: "#modeloUSA",
-        argentina: "#modeloARG",
-        coreaDelSur: "#modeloSKOR",
-        ecuador: "#modeloECU",
-        iran: "#modeloIRAN",
-        japon: "#modeloJPN",
-        jordania: "#modeloJOR",
-        nuevaZelanda: "#modeloNZ",
-        uzbekistan: "#modeloUZB",
         };
 
         const videos = {
         mexico: { video: "#videoMX", ar: "videoMexico" },
         brasil: { video: "#videoBR", ar: "videoBrasil" },
         canada: { video: "#videoCA", ar: "videoCanada" },
-        australia: { video: "#videoAUS", ar: "videoAustralia" },
-        usa: { video: "#videoUSA", ar: "videoEstadosUnidos" },
-        argentina: { video: "#videoARG", ar: "videoArgentina" },
-        coreaDelSur: { video: "#videoSKOR", ar: "videoCoreaDelSur" },
-        ecuador: { video: "#videoECU", ar: "videoEcuador" },
-        iran: { video: "#videoIRAN", ar: "videoIrann" },
-        japon: { video: "#videoJPN", ar: "videoJapon" },
-        jordania: { video: "#videoJOR", ar: "videoJordania" },
-        nuevaZelanda: { video: "#videoNZ", ar: "videoNuevaZelanda" },
-        uzbekistan: { video: "#videoUZB", ar: "videoUzbekistan" },
         };
 
         const escalas = {
         mexico: "0.05 0.05 0.05",
         brasil: "0.0008 0.0008 0.0008",
         canada: "0.0002 0.0002 0.0002",
-        australia: "0.05 0.05 0.05",
-        usa: "0.0002 0.0002 0.0002",
-        argentina: "0.0008 0.0008 0.0008",
-        coreaDelSur: "0.0002 0.0002 0.0002",
-        ecuador: "0.05 0.05 0.05",
-        iran: "0.0002 0.0002 0.0002",
-        japon: "0.05 0.05 0.05",
-        jordania: "0.0002 0.0002 0.0002",
-        nuevaZelanda: "0.05 0.05 0.05",
-        uzbekistan: "0.0002 0.0002 0.0002",
         };
 
         const overlayMenu = document.getElementById("overlay-menu");
@@ -249,7 +189,7 @@
             model.removeAttribute("animation");
             model.removeAttribute("animation-mixer");
 
-            if (["mexico", "ecuador", "australia", "japon", "nuevaZelanda"].includes(currentTarget.country)) {
+            if (["mexico"].includes(currentTarget.country)) {
             model.setAttribute("animation", {
             property: "position",
             dir: "alternate",
@@ -271,7 +211,7 @@
 
         model.removeAttribute("animation");
         model.removeAttribute("animation-mixer");
-        if (["mexico", "ecuador", "australia", "japon", "nuevaZelanda"].includes(currentTarget.country)) {
+        if (["mexico"].includes(currentTarget.country)) {
         model.setAttribute("position", "0 0 0");
         }
         });
