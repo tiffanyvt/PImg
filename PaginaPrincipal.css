@@ -201,6 +201,12 @@ main{
  color: #FFD700;
 }    
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .stats-table {
   width: 100%;
   border-collapse: collapse;
